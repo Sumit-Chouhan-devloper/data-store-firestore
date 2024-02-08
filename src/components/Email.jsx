@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
-
 const Email = () => {
   const initialData = {
     name: "",
