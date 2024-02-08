@@ -7,7 +7,6 @@ const Email = () => {
     email: "",
     password: "",
   };
-
   const [data, setData] = useState(initialData);
   const [passwordError, setPasswordError] = useState("");
 
