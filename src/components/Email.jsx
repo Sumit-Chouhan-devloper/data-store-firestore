@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import emailjs from "@emailjs/browser";
+
 const Email = () => {
   const initialData = {
     name: "",
     email: "",
+    number: "",
     password: "",
   };
   const [data, setData] = useState(initialData);
@@ -29,21 +30,17 @@ const Email = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
-    try {
-      await emailjs.sendForm(
-        "service_jgppl1a",
-        "template_qv7c8vs",
-        e.target.form,
-        "wVVUO2SdWymVMbuXv"
-      );
-      console.log("Email sent successfully!");
-      setData(initialData);
-    } catch (error) {
-      console.error("Error sending email:", error);
+    // Check if any field is empty or if there's a password error
+    if (
+      Object.values(data).some((value) => value.trim() === "") ||
+      passwordError
+    ) {
+      alert("Please fill in all fields correctly.");
+      return;
     }
+    console.log(data);
     setData(initialData);
   };
 
@@ -68,6 +65,14 @@ const Email = () => {
           placeholder="Email"
         />
         <input
+          name="number"
+          value={data.number}
+          onChange={handleChange}
+          className="rounded-md outline-none px-2 py-1"
+          type="number"
+          placeholder="Number"
+        />
+        <input
           name="password"
           value={data.password}
           onChange={handleChange}
@@ -81,7 +86,10 @@ const Email = () => {
         <button
           onClick={handleSubmit}
           className="py-1 rounded-md hover:bg-red-500 transition-all duration-300 bg-green-500 text-white font-bold"
-          disabled={passwordError !== ""}
+          disabled={
+            Object.values(data).some((value) => value.trim() === "") ||
+            passwordError
+          }
         >
           Submit
         </button>
