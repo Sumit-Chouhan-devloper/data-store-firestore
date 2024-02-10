@@ -1,12 +1,12 @@
-import './App.css';
-import Email from './components/Email';
+import React from 'react'
+import Email from './components/Email'
 
-function App() {
+const App = () => {
   return (
     <>
     <Email/>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
